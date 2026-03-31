@@ -6,6 +6,7 @@ int sockfd;
 
 // Функция для получения сообщений от сервера
 void* receive_thread(void* arg) {
+    (void)arg;
     Message msg;
     
     while (running) {
@@ -48,7 +49,7 @@ void* receive_thread(void* arg) {
     return NULL;
 }
 
-int main(int argc, char* argv[]) {
+int main(void) {
     struct sockaddr_in server_addr;
     Message msg;
     pthread_t thread;

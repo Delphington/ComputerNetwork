@@ -1,6 +1,6 @@
 #include "common.h"
 
-int main(int argc, char* argv[]) {
+int main(void) {
     int server_fd, client_fd;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_len = sizeof(client_addr);
