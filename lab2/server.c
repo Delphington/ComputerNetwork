@@ -7,27 +7,23 @@ int main(void) {
     Message msg;
     char client_ip[INET_ADDRSTRLEN];
     
-    // Создание сокета
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) {
         perror("socket");
         exit(EXIT_FAILURE);
     }
     
-    // Настройка адреса сервера
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(DEFAULT_PORT);
     
-    // Привязка сокета
     if (bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         perror("bind");
         close(server_fd);
         exit(EXIT_FAILURE);
     }
     
-    // Ожидание подключения (максимум 1 клиент)
     if (listen(server_fd, 1) < 0) {
         perror("listen");
         close(server_fd);

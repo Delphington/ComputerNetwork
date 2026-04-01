@@ -26,9 +26,9 @@ enum {
 
 // Структура сообщения
 typedef struct {
-    uint32_t length;          // длина поля type + payload
-    uint8_t type;              // тип сообщения
-    char payload[MAX_PAYLOAD]; // данные
+    uint32_t length;
+    uint8_t type;
+    char payload[MAX_PAYLOAD];
 } Message;
 
 // Функция для отправки сообщения
@@ -43,7 +43,7 @@ int send_message(int sockfd, uint8_t type, const char* data) {
         msg.payload[0] = '\0';
     }
     
-    msg.length = sizeof(uint8_t) + strlen(msg.payload) + 1; // +1 для нуль-терминатора
+    msg.length = sizeof(uint8_t) + strlen(msg.payload) + 1;
     
     // Отправляем структуру целиком
     if (send(sockfd, &msg, sizeof(uint32_t) + sizeof(uint8_t) + msg.length - sizeof(uint8_t), 0) <= 0) {

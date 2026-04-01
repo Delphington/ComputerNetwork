@@ -13,3 +13,8 @@
     - Ожидает и выводит ответ от сервера.
 
 Теоретическая часть: Сокеты, socket(), bind(), sendto(), recvfrom(), sockaddr_in.
+
+
+
+socket() → bind() → listen() → accept() → recv()/send()
+
