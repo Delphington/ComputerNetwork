@@ -56,14 +56,12 @@ int main(void) {
     char input[MAX_PAYLOAD];
     char nickname[256];
     
-    // Создание сокета
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
         perror("socket");
         exit(EXIT_FAILURE);
     }
     
-    // Настройка адреса сервера
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(DEFAULT_PORT);
@@ -83,15 +81,12 @@ int main(void) {
     
     printf("Connected to server\n");
     
-    // Ввод ника
     printf("Enter your nickname: ");
     fgets(nickname, sizeof(nickname), stdin);
     nickname[strcspn(nickname, "\n")] = '\0';
     
-    // Отправка MSG_HELLO
     send_message(sockfd, MSG_HELLO, nickname);
     
-    // Получение MSG_WELCOME
     if (receive_message(sockfd, &msg) < 0) {
         perror("recv welcome");
         close(sockfd);
@@ -136,7 +131,6 @@ int main(void) {
     // Ожидание завершения потока приема
     pthread_join(thread, NULL);
     
-    // Закрытие сокета
     close(sockfd);
     printf("Disconnected\n");
     
